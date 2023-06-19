@@ -42,7 +42,7 @@ CONFIG = {
     'epochs' : 10,
     'lr' : 1e-3,
     'ptmlr' : 1e-5,
-    'batch_size' : 32,
+    'batch_size' : 16,
     'max_len' : 256,
     'bert_dim' : 1024,
     'pad_value' : 1,
@@ -67,6 +67,7 @@ CONFIG = {
     'speaker_vocab' : '',
     'emotion_vocab' : '',
     'temp_path': '',
+    'inference_file': '',
     'ngpus' : torch.cuda.device_count(),
     'device': torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 }
