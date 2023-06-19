@@ -197,10 +197,10 @@ def train(model, train_dialogues, dev_dialogues, test_dialogues):
                               centers_mask,
                               desc='new best test @ epoch {}'.format(
                                   epoch - 1))
-                    # checkpoint_saver.save_checkpoint()
+                    checkpoint_saver.save_checkpoint()
                 else:
                     epochs_not_update += 1
-                    # checkpoint_saver.load_checkpoint()
+                    checkpoint_saver.load_checkpoint()
                     torch.cuda.empty_cache()
                 if epochs_not_update >= 5:
                     break
@@ -270,7 +270,7 @@ def train(model, train_dialogues, dev_dialogues, test_dialogues):
         model, centers, centers_mask = load_latest()
         f1 = test(model, testset, centers, centers_mask)
         print('best f1 test is {:.4f}'.format(f1), flush=True)
-        os.system('rm -r {}'.format(CONFIG['temp_path']))
+        # os.system('rm -r {}'.format(CONFIG['temp_path']))
 
 
 def test(model, data, centers, centers_mask, desc=''):
@@ -325,7 +325,7 @@ def test(model, data, centers, centers_mask, desc=''):
                  y_pred=cluster_list[idx],
                  average='weighted') for idx in range(num_feature)
     ]
-
+    
     # f1 = max(max(direct_f1_scores), max(cluster_f1_scores))
     f1 = max(cluster_f1_scores)
     print('\n{} best w-f1 is {:.4f}'.format(desc, f1), flush=True)
@@ -334,6 +334,55 @@ def test(model, data, centers, centers_mask, desc=''):
           flush=True)
 
     return f1
+
+def inference(model, data, centers, centers_mask, desc=''):
+
+    model.eval()
+    inner_model = model.module if hasattr(model, 'module') else model
+    y_true_list = []
+    direct_list = [[], [], [], []]
+    cluster_list = [[], [], [], []]
+    sampler = SequentialSampler(data)
+    dataloader = DataLoader(
+        data,
+        batch_size=1,
+        sampler=sampler,
+        num_workers=0,  # multiprocessing.cpu_count()
+    )
+    # tq_test = tqdm(total=len(dataloader), desc="testing", position=2)
+
+    for batch_id, batch_data in enumerate(dataloader):
+        batch_data = [x.to(inner_model.device()) for x in batch_data]
+        sentences = batch_data[0]
+        emotion_idxs = batch_data[1].reshape(-1)
+        with torch.no_grad():
+            ccl_reps = inner_model.gen_f_reps(sentences)
+        cluster_outputs, direct_outputs = [], []
+
+        feature_list = [ccl_reps]
+        num_feature = len(feature_list)
+
+        for idx, feature in enumerate(feature_list):
+            outputs = inner_model(feature, centers, score_func)
+            outputs -= (1 - centers_mask) * 2
+            cluster_outputs.append(torch.argmax(outputs.max(-1)[0], -1))
+            direct_outputs.append(
+                torch.argmax(inner_model.predictor(feature), -1))
+        for batch_id in range(emotion_idxs.shape[0]):
+            if emotion_idxs[batch_id] > -1:
+                for idx in range(num_feature):
+                    direct_list[idx].append(
+                        direct_outputs[idx][batch_id].item())
+                    cluster_list[idx].append(
+                        cluster_outputs[idx][batch_id].item())
+                y_true_list.append(emotion_idxs[batch_id].item())
+        # tq_test.update()
+    
+    # for i in range(len(y_true_list)):
+    #     for idx in range(num_feature):
+    #         print(f"\n{idx2word[y_true_list[i]]} ::::: {idx2word[direct_list[idx][i]] } ::::: {idx2word[cluster_list[idx][i]] }")
+    
+    return cluster_list[0][-1]
 
 
 def load_latest():
@@ -381,6 +430,11 @@ if __name__ == '__main__':
                         '--finetune',
                         action='store_true',
                         help='fine tune the best model',
+                        default=False)
+    parser.add_argument('-if',
+                        '--infer',
+                        action='store_true',
+                        help='infer from the best model',
                         default=False)
     parser.add_argument('-cl',
                         '--cl',
@@ -491,6 +545,13 @@ if __name__ == '__main__':
                         default=CONFIG['temp_path'],
                         type=str,
                         required=False)
+    
+    parser.add_argument('-inference_file',
+                        '--inference_file',
+                        default=CONFIG['inference_file'],
+                        type=str,
+                        required=False)
+
     parser.add_argument('-acc_step',
                         '--accumulation_steps',
                         default=CONFIG['accumulation_steps'],
@@ -518,8 +579,8 @@ if __name__ == '__main__':
         torch.cuda.set_device(args.local_rank)
         device = torch.device("cuda", args.local_rank)
         os.environ["MASTER_ADDR"] = "127.0.0.1"
-        os.environ["MASTER_PORT"] = "29500"
-        torch.distributed.init_process_group(backend="nccl")
+        os.environ["MASTER_PORT"] = "56666"
+        torch.distributed.init_process_group(backend="nccl", world_size=0, rank=args.local_rank ,store=None, group_name='')
         args.n_gpu = 1
 
     args.device = device
@@ -562,7 +623,7 @@ if __name__ == '__main__':
                     exist_ok=True)
 
 
-    if args.task_name == 'meld':
+    if args.task_name == 'meld' and args.infer==False:
         CONFIG['data_path'] = './MELD'
         CONFIG['num_classes'] = 7
         train_data_path = os.path.join(CONFIG['data_path'], 'train_sent_emo.csv')
@@ -610,7 +671,7 @@ if __name__ == '__main__':
         model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model)
 
     model.to(args.device)
-    if args.local_rank in [-1, 0]:
+    if args.local_rank in [-1, 0] and args.infer==False:
         print('---config---')
         for k, v in CONFIG.items():
             print(k, '\t\t\t', v, flush=True)
@@ -624,6 +685,19 @@ if __name__ == '__main__':
             test_dialogues = load_emorynlp_turn(test_data_path)
         if args.task_name == 'meld':
             test_dialogues = load_meld_turn(test_data_path)
-        testset = build_dataset(test_dialogues)
+        testset = build_dataset(test_dialogues)        
         best_f1 = test(model, testset, centers, centers_mask)
         print(best_f1)
+    if args.infer:
+        with open(CONFIG['inference_file'],'r') as file:
+            infer_dialogues=json.load(file)
+
+        inferset=build_dataset([infer_dialogues])
+        idx2word=['neutral', 'surprise', 'fear', 'sadness', 'joy', 'disgust', 'anger']
+        lb=inference(model, inferset, centers, centers_mask)
+        print(idx2word[lb])
+        infer_dialogues[-1]['label']=lb
+        
+        with open(CONFIG['inference_file'],'w') as file:
+            json.dump(infer_dialogues,file,indent=2)
+
