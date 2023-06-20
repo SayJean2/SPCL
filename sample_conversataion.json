@@ -1,12 +1,465 @@
 [
   {
-    "speaker": "Carol",
-    "text": "I don't care. I am trying to get a person out of my body here, and you're not making it any easier. Now go!",
-    "label": 6
+    "start": 0.568,
+    "end": 1.949,
+    "text": " Hello.",
+    "words": [
+      {
+        "word": "Hello.",
+        "start": 0.568,
+        "end": 1.869,
+        "score": 0.676,
+        "speaker": "SPEAKER_02"
+      }
+    ],
+    "speaker": "SPEAKER_02",
+    "emotion": "neutral"
   },
   {
-    "speaker": "Ross",
-    "text": "Thanks a lot",
-    "label": -1
+    "start": 1.949,
+    "end": 5.513,
+    "text": "How are you?",
+    "words": [
+      {
+        "word": "How",
+        "start": 1.949,
+        "end": 3.611,
+        "score": 0.52,
+        "speaker": "SPEAKER_02"
+      },
+      {
+        "word": "are",
+        "start": 4.652,
+        "end": 4.772,
+        "score": 0.427,
+        "speaker": "SPEAKER_00"
+      },
+      {
+        "word": "you?",
+        "start": 4.812,
+        "end": 5.353,
+        "score": 0.756,
+        "speaker": "SPEAKER_02"
+      }
+    ],
+    "speaker": "SPEAKER_02",
+    "emotion": "neutral"
+  },
+  {
+    "start": 5.513,
+    "end": 7.215,
+    "text": "I'm okay.",
+    "words": [
+      {
+        "word": "I'm",
+        "start": 5.513,
+        "end": 5.714,
+        "score": 0.639,
+        "speaker": "SPEAKER_02"
+      },
+      {
+        "word": "okay.",
+        "start": 5.734,
+        "end": 6.514,
+        "score": 0.831,
+        "speaker": "SPEAKER_02"
+      }
+    ],
+    "speaker": "SPEAKER_02",
+    "emotion": "neutral"
+  },
+  {
+    "start": 7.215,
+    "end": 8.096,
+    "text": "I will be.",
+    "words": [
+      {
+        "word": "I",
+        "start": 7.215,
+        "end": 7.315,
+        "score": 0.822,
+        "speaker": "SPEAKER_02"
+      },
+      {
+        "word": "will",
+        "start": 7.355,
+        "end": 7.596,
+        "score": 0.909,
+        "speaker": "SPEAKER_02"
+      },
+      {
+        "word": "be.",
+        "start": 7.636,
+        "end": 7.816,
+        "score": 0.966,
+        "speaker": "SPEAKER_02"
+      }
+    ],
+    "speaker": "SPEAKER_02",
+    "emotion": "neutral"
+  },
+  {
+    "start": 8.096,
+    "end": 10.239,
+    "text": "I said she could stay with us tomorrow until she feels better.",
+    "words": [
+      {
+        "word": "I",
+        "start": 8.096,
+        "end": 8.176,
+        "score": 0.697,
+        "speaker": "SPEAKER_00"
+      },
+      {
+        "word": "said",
+        "start": 8.196,
+        "end": 8.337,
+        "score": 0.883,
+        "speaker": "SPEAKER_00"
+      },
+      {
+        "word": "she",
+        "start": 8.377,
+        "end": 8.457,
+        "score": 0.957,
+        "speaker": "SPEAKER_00"
+      },
+      {
+        "word": "could",
+        "start": 8.497,
+        "end": 8.617,
+        "score": 0.896,
+        "speaker": "SPEAKER_00"
+      },
+      {
+        "word": "stay",
+        "start": 8.637,
+        "end": 8.797,
+        "score": 0.823,
+        "speaker": "SPEAKER_00"
+      },
+      {
+        "word": "with",
+        "start": 8.817,
+        "end": 8.937,
+        "score": 0.802,
+        "speaker": "SPEAKER_00"
+      },
+      {
+        "word": "us",
+        "start": 8.957,
+        "end": 9.017,
+        "score": 0.004,
+        "speaker": "SPEAKER_00"
+      },
+      {
+        "word": "tomorrow",
+        "start": 9.037,
+        "end": 9.338,
+        "score": 0.3,
+        "speaker": "SPEAKER_00"
+      },
+      {
+        "word": "until",
+        "start": 9.358,
+        "end": 9.558,
+        "score": 0.357,
+        "speaker": "SPEAKER_00"
+      },
+      {
+        "word": "she",
+        "start": 9.578,
+        "end": 9.658,
+        "score": 0.945,
+        "speaker": "SPEAKER_00"
+      },
+      {
+        "word": "feels",
+        "start": 9.678,
+        "end": 9.898,
+        "score": 0.851,
+        "speaker": "SPEAKER_00"
+      },
+      {
+        "word": "better.",
+        "start": 9.958,
+        "end": 10.159,
+        "score": 0.704,
+        "speaker": "SPEAKER_00"
+      }
+    ],
+    "speaker": "SPEAKER_00",
+    "emotion": "neutral"
+  },
+  {
+    "start": 10.239,
+    "end": 12.281,
+    "text": "Of course she can.",
+    "words": [
+      {
+        "word": "Of",
+        "start": 10.239,
+        "end": 10.88,
+        "score": 0.498,
+        "speaker": "SPEAKER_03"
+      },
+      {
+        "word": "course",
+        "start": 10.94,
+        "end": 11.18,
+        "score": 0.475,
+        "speaker": "SPEAKER_03"
+      },
+      {
+        "word": "she",
+        "start": 11.22,
+        "end": 11.52,
+        "score": 0.475,
+        "speaker": "SPEAKER_03"
+      },
+      {
+        "word": "can.",
+        "start": 11.6,
+        "end": 12.061,
+        "score": 0.373,
+        "speaker": "SPEAKER_03"
+      }
+    ],
+    "speaker": "SPEAKER_03",
+    "emotion": "neutral"
+  },
+  {
+    "start": 12.281,
+    "end": 14.043,
+    "text": "No, this won't be for long.",
+    "words": [
+      {
+        "word": "No,",
+        "start": 12.281,
+        "end": 12.561,
+        "score": 0.486,
+        "speaker": "SPEAKER_03"
+      },
+      {
+        "word": "this",
+        "start": 12.682,
+        "end": 12.982,
+        "score": 0.697,
+        "speaker": "SPEAKER_03"
+      },
+      {
+        "word": "won't",
+        "start": 13.042,
+        "end": 13.242,
+        "score": 0.788,
+        "speaker": "SPEAKER_03"
+      },
+      {
+        "word": "be",
+        "start": 13.262,
+        "end": 13.402,
+        "score": 0.95,
+        "speaker": "SPEAKER_03"
+      },
+      {
+        "word": "for",
+        "start": 13.443,
+        "end": 13.623,
+        "score": 0.719,
+        "speaker": "SPEAKER_03"
+      },
+      {
+        "word": "long.",
+        "start": 13.643,
+        "end": 13.943,
+        "score": 0.837,
+        "speaker": "SPEAKER_03"
+      }
+    ],
+    "speaker": "SPEAKER_03",
+    "emotion": "neutral"
+  },
+  {
+    "start": 14.043,
+    "end": 16.486,
+    "text": "Well, you can stay as long as you want, my love.",
+    "words": [
+      {
+        "word": "Well,",
+        "start": 14.043,
+        "end": 14.263,
+        "score": 0.516,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "you",
+        "start": 14.283,
+        "end": 14.384,
+        "score": 0.99,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "can",
+        "start": 14.424,
+        "end": 14.584,
+        "score": 0.875,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "stay",
+        "start": 14.604,
+        "end": 14.764,
+        "score": 0.837,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "as",
+        "start": 14.804,
+        "end": 14.864,
+        "score": 0.836,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "long",
+        "start": 14.904,
+        "end": 15.044,
+        "score": 0.979,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "as",
+        "start": 15.084,
+        "end": 15.144,
+        "score": 0.956,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "you",
+        "start": 15.165,
+        "end": 15.285,
+        "score": 0.924,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "want,",
+        "start": 15.325,
+        "end": 15.465,
+        "score": 0.794,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "my",
+        "start": 15.565,
+        "end": 15.785,
+        "score": 0.9,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "love.",
+        "start": 15.865,
+        "end": 16.406,
+        "score": 0.771,
+        "speaker": "SPEAKER_01"
+      }
+    ],
+    "speaker": "SPEAKER_01",
+    "emotion": "neutral"
+  },
+  {
+    "start": 16.486,
+    "end": 18.348,
+    "text": "I really missed you.",
+    "words": [
+      {
+        "word": "I",
+        "start": 16.486,
+        "end": 16.586,
+        "score": 0.679,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "really",
+        "start": 16.706,
+        "end": 17.007,
+        "score": 0.85,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "missed",
+        "start": 17.067,
+        "end": 17.487,
+        "score": 0.736,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "you.",
+        "start": 17.507,
+        "end": 17.788,
+        "score": 0.461,
+        "speaker": "SPEAKER_01"
+      }
+    ],
+    "speaker": "SPEAKER_01",
+    "emotion": "sadness"
+  },
+  {
+    "start": 18.348,
+    "end": 19.269,
+    "text": "Pops.",
+    "words": [
+      {
+        "word": "Pops.",
+        "start": 18.348,
+        "end": 18.809,
+        "score": 0.78,
+        "speaker": "SPEAKER_01"
+      }
+    ],
+    "speaker": "SPEAKER_01",
+    "emotion": "neutral"
+  },
+  {
+    "start": 19.269,
+    "end": 20.09,
+    "text": "Great to see you, love.",
+    "words": [
+      {
+        "word": "Great",
+        "start": 19.269,
+        "end": 19.49,
+        "score": 0.851,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "to",
+        "start": 19.53,
+        "end": 19.63,
+        "score": 0.932,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "see",
+        "start": 19.67,
+        "end": 19.85,
+        "score": 0.922,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "you,",
+        "start": 19.89,
+        "end": 19.99,
+        "score": 0.645,
+        "speaker": "SPEAKER_01"
+      },
+      {
+        "word": "love.",
+        "start": 20.01,
+        "end": 20.09,
+        "score": 0.089,
+        "speaker": "SPEAKER_01"
+      }
+    ],
+    "speaker": "SPEAKER_01",
+    "emotion": "joy"
   }
 ]
