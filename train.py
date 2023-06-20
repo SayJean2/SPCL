@@ -382,7 +382,7 @@ def inference(model, data, centers, centers_mask, desc=''):
     #     for idx in range(num_feature):
     #         print(f"\n{idx2word[y_true_list[i]]} ::::: {idx2word[direct_list[idx][i]] } ::::: {idx2word[cluster_list[idx][i]] }")
     
-    return cluster_list[0][-1]
+    return cluster_list[0]
 
 
 def load_latest():
@@ -689,15 +689,21 @@ if __name__ == '__main__':
         best_f1 = test(model, testset, centers, centers_mask)
         print(best_f1)
     if args.infer:
+     
         with open(CONFIG['inference_file'],'r') as file:
             infer_dialogues=json.load(file)
+
+        for i in infer_dialogues:
+            i['label']=0
 
         inferset=build_dataset([infer_dialogues])
         idx2word=['neutral', 'surprise', 'fear', 'sadness', 'joy', 'disgust', 'anger']
         lb=inference(model, inferset, centers, centers_mask)
-        print(idx2word[lb])
-        infer_dialogues[-1]['label']=lb
-        
-        with open(CONFIG['inference_file'],'w') as file:
-            json.dump(infer_dialogues,file,indent=2)
 
+        assert len(lb)==len(infer_dialogues)
+        for i in range(len(lb)):
+            infer_dialogues[i]['emotion']=idx2word[lb[i]]
+            del infer_dialogues[i]['label']
+        
+        with open("/home/jerry0110/SPCL/whisperX_out2.json",'w') as file:
+            json.dump(infer_dialogues,file,indent=2)
